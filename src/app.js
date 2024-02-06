@@ -1,5 +1,5 @@
 const express = require('express');
-let router = express.Router();
+const router = require('../src/routes/router')
 
 const PORT = 5000;
 
@@ -10,9 +10,7 @@ const app = express();
 expressConfig(app);
 handlebarsConfig(app);
 
-router.get('/', (req, res) => {
-    res.render('home', {layout: false})
-})
+app.use(router)
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

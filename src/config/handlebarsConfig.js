@@ -10,7 +10,6 @@ const handlebarsConfig = (app) => {
 
     app.set('view engine', 'hbs')
     app.set('views', path.join(__dirname, '../views'))
-    app.use('/static', express.static('src/static'));
 
     return app;
 }
