@@ -27,14 +27,14 @@
                 <!-- Guest users and Logged users -->
                 <li><a href="/">Home</a></li>
                 <li><a href="#">All Courses</a></li>
-                <!--For guest users-->
+                {{#if isNotAuthenticated}}
                 <li><a href="/login">Login</a></li>
                 <li><a href="/register">Register</a></li>
-                <!--For loggin users-->
+                {{else}}   
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Create Course Offers</a></li>
                 <li><a href="#">Logout</a></li>
-
+                {{/if}}; 
             </ul>
         </nav>
     </div>
