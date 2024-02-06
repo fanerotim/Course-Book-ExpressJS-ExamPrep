@@ -1,0 +1,19 @@
+{
+  "name": "course-book-expressjs-examprep",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fanerotim/Course-Book-ExpressJS-ExamPrep.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fanerotim/Course-Book-ExpressJS-ExamPrep/issues"
+  },
+  "homepage": "https://github.com/fanerotim/Course-Book-ExpressJS-ExamPrep#readme"
+}
