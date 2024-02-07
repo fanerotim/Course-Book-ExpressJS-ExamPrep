@@ -14,4 +14,8 @@ router.get('/catalog', async (req, res) => {
     res.render('catalog', {courses});
 })
 
+router.get('/404', (req, res) => {
+    res.render('404');
+})
+
 module.exports = router;
