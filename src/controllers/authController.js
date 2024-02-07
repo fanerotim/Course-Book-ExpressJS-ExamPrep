@@ -31,8 +31,12 @@ router.post('/login', async (req, res) => {
     } else {
         //TODO: need to add error handling
         res.end();
-    }
-    
+    } 
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('auth');
+    res.redirect('/')
 })
 
 module.exports = router;
