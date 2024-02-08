@@ -49,6 +49,5 @@ exports.login = async (userData) => {
     }
 
     let token = jwt.sign(payload, SECRET);
-
     return token;
 }

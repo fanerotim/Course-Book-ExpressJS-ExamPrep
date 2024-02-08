@@ -24,14 +24,14 @@ router.post('/login', async (req, res) => {
     const userData = req.body;
 
     let token = await authService.login(userData);
-
+    
     if (token) {
         res.cookie('auth', token);
         res.redirect('/')
     } else {
-        //TODO: need to add error handling
-        res.end();
-    } 
+        // TODO: need to add error handling
+        res.render('login', {error: 'Username or password is incorrect.'});
+    }
 })
 
 router.get('/logout', (req, res) => {
