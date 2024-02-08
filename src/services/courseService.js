@@ -13,3 +13,9 @@ exports.getOwnerData = async (id) => {
     let ownerData = await User.findOne({_id: id._id}).lean();
     return ownerData;
 }
+
+exports.signUp = async = async (studentId, courseId) => {
+    let courseInfo = await Course.findById(courseId);
+    courseInfo.signUpList.push(studentId); 
+    return courseInfo.save();
+}

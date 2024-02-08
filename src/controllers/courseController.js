@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const courseService = require('../services/courseService');
+const mongoose = require('mongoose')
 
 router.get('/courses/:courseId', async (req, res) => {
     let courseId = req.params.courseId;
@@ -8,8 +9,28 @@ router.get('/courses/:courseId', async (req, res) => {
     const ownerData = await courseService.getOwnerData({_id: courseData.owner});
 
     const isOwner = JSON.stringify(req.user?._id) === JSON.stringify(ownerData._id);
+    let userId = new mongoose.Types.ObjectId(req.user?._id)
+    
+    let isSignedUp = false;
+    //TODO: to think of a better way to perform the check if signUpList includes userId
+    //IMPORTANT TODO: TO COMPLETE THE SIGNED BY IN THE TEMPLATE
+    courseData.signUpList.map(x => {
+        if (JSON.stringify(x) === JSON.stringify(userId)) {
+            isSignedUp = true;
+            return;
+        }
+    });
 
-    res.render('details', {courseData, ownerData, isOwner});
+    res.render('details', {courseData, ownerData, isOwner, isSignedUp});
+})
+
+router.get('/courses/:courseId/sign-up', async (req, res) => {
+    
+    const courseId = req.params.courseId;
+    const studentId = req.user._id;
+
+    const signUpList = await courseService.signUp(studentId, courseId);
+    res.redirect(`/courses/${courseId}`)
 })
 
 module.exports = router;
