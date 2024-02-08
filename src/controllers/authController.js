@@ -23,6 +23,9 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const userData = req.body;
 
+    //adding the details of currently logged in user to the req object
+    req.user = userData;
+
     let token = await authService.login(userData);
     
     if (token) {
