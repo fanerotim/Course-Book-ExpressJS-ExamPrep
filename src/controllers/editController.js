@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const Course = require('../models/Course');
 const courseService = require('../services/courseService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/courses/:courseId/edit', async (req, res) => {
+
+router.get('/courses/:courseId/edit', authMiddleware.isOwner, async (req, res) => {
     let courseId = req.params.courseId;
 
     let courseData = await courseService.getCourseData(courseId);
@@ -18,7 +20,7 @@ router.post('/courses/:courseId/edit', async (req, res) => {
     res.redirect(`/courses/${courseId}/`)
 });
 
-router.get('/courses/:courseId/delete', async (req, res) => {
+router.get('/courses/:courseId/delete', authMiddleware.isOwner, async (req, res) => {
     let courseId = req.params.courseId;
     let deletedCourse = await courseService.deleteCourse(courseId);
   
