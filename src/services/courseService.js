@@ -4,7 +4,7 @@ const User = require('../models/User');
 
 exports.getCourseData = async (id) => {
     
-    let courseData = await Course.findOne({_id: id}).lean();
+    let courseData = await Course.findOne({_id: id}).populate('signUpList').lean();
     return courseData;
 }
 

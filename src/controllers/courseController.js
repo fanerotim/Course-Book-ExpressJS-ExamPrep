@@ -9,19 +9,25 @@ router.get('/courses/:courseId', async (req, res) => {
     const ownerData = await courseService.getOwnerData({_id: courseData.owner});
 
     const isOwner = JSON.stringify(req.user?._id) === JSON.stringify(ownerData._id);
-    let userId = new mongoose.Types.ObjectId(req.user?._id)
+    let userId = new mongoose.Types.ObjectId(req.user?._id);
     
     let isSignedUp = false;
     //TODO: to think of a better way to perform the check if signUpList includes userId
-    //IMPORTANT TODO: TO COMPLETE THE SIGNED BY IN THE TEMPLATE
     courseData.signUpList.map(x => {
-        if (JSON.stringify(x) === JSON.stringify(userId)) {
+        if (JSON.stringify(x._id) === JSON.stringify(userId)) {
             isSignedUp = true;
             return;
         }
     });
+    
+    let listOfStudents = [];
 
-    res.render('details', {courseData, ownerData, isOwner, isSignedUp});
+    courseData.signUpList.forEach((student) => listOfStudents.push(student.email));
+    listOfStudents = listOfStudents.join(', ')
+    
+    let isLoggedIn = req.user;
+    console.log(typeof isLoggedIn);
+    res.render('details', {courseData, ownerData, isOwner, isSignedUp, listOfStudents, isLoggedIn});
 })
 
 router.get('/courses/:courseId/sign-up', async (req, res) => {
