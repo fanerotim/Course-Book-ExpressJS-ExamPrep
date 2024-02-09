@@ -26,7 +26,7 @@ router.get('/courses/:courseId', async (req, res) => {
     listOfStudents = listOfStudents.join(', ')
     
     let isLoggedIn = req.user;
-    console.log(typeof isLoggedIn);
+
     res.render('details', {courseData, ownerData, isOwner, isSignedUp, listOfStudents, isLoggedIn});
 })
 

@@ -24,7 +24,7 @@
         <div class="btn-container">
             <!-- Only for registered user and creator of the course-->
             {{#if isOwner}}
-            <a href="#">Edit</a>
+            <a href="/courses/{{courseData._id}}/edit">Edit</a>
             <a href="#">Delete</a>
             {{else}}
             {{#unless isSignedUp}}

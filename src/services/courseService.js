@@ -14,8 +14,13 @@ exports.getOwnerData = async (id) => {
     return ownerData;
 }
 
-exports.signUp = async = async (studentId, courseId) => {
+exports.signUp = async (studentId, courseId) => {
     let courseInfo = await Course.findById(courseId);
     courseInfo.signUpList.push(studentId); 
     return courseInfo.save();
+}
+
+exports.editCourse = async (id, courseData) => {
+    let updatedCourse = await Course.findByIdAndUpdate(id, courseData);
+    return updatedCourse;
 }
