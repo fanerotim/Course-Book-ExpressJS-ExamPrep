@@ -36,3 +36,19 @@ exports.isOwner = async (req, res, next) => {
     }
     next(); 
 }
+
+exports.isLoggedIn = async (req, res, next) => {
+    let isLoggedIn = req.user;
+
+    if (isLoggedIn) {
+        return res.status(402).send('Unauthorized');
+    }
+    next();
+}
+
+exports.isNotLoggedIn = async (req, res, next) => {
+    if (!req.user) {
+        return res.status(402).send('Unauthorized');
+    }
+    next();
+}

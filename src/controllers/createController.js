@@ -2,9 +2,10 @@ const router = require('express').Router();
 const createService = require('../services/createService');
 const jwt = require('jsonwebtoken');
 
-const SECRET = require('../config/config')
+const SECRET = require('../config/config');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/create', (req, res) => {
+router.get('/create', authMiddleware.isNotLoggedIn, (req, res) => {
     res.render('create');
 })
 

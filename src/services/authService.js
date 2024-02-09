@@ -6,13 +6,10 @@ const SECRET = require('../config/config');
 
 exports.register = async (userData) => {
 
-    //Check if user exists
     const hasUser = await User.findOne({email: userData.email});
-
+    
     if (hasUser) {
-        console.log('Username or password you are trying to use are already taken.')
-        //TODO: Error handling
-        return;
+        throw new Error('Username or password do not match. Please try again.')
     }
 
     if (userData.password === userData.rePassword) {
@@ -26,6 +23,8 @@ exports.register = async (userData) => {
         }
 
         User.create(newUser);
+    } else {
+        throw new Error('Password mismatch. Please try again.')
     }
 }
 

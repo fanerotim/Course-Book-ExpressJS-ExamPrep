@@ -1,22 +1,25 @@
 const router = require('express').Router();
 
 const authService = require('../services/authService');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 
-router.get('/register', (req, res) => {
+router.get('/register', authMiddleware.isLoggedIn, (req, res) => {
     res.render('register');
 });
 
 router.post('/register', async (req, res) => {
     const userData = req.body;
 
-    //TODO: Complete error handling
-    await authService.register(userData);
-    
-    res.redirect('/');
+    try {
+        let result = await authService.register(userData);
+        res.redirect('/');
+    } catch(err) {
+        res.render('register', {error: err})
+    }  
 })
 
-router.get('/login', (req, res) => {
+router.get('/login', authMiddleware.isLoggedIn, (req, res) => {
     res.render('login');
 })
 
@@ -37,7 +40,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/logout', (req, res) => {
+router.get('/logout', authMiddleware.isNotLoggedIn, (req, res) => {
     res.clearCookie('auth');
     req.user = undefined;
     res.redirect('/')
