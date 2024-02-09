@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
         res.redirect('/')
     } else {
         // TODO: need to add error handling
-        res.render('login', {error: 'Username or password is incorrect.'});
+        res.render('login', {error: 'Username or password is incorrect. Please try again.'});
     }
 })
 
