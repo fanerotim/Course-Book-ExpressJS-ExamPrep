@@ -25,7 +25,7 @@
             <!-- Only for registered user and creator of the course-->
             {{#if isOwner}}
             <a href="/courses/{{courseData._id}}/edit">Edit</a>
-            <a href="#">Delete</a>
+            <a href="/courses/{{courseData._id}}/delete">Delete</a>
             {{else}}
             {{#unless isSignedUp}}
             <!-- logged in user who has not yet sign up for the course-->

@@ -24,3 +24,8 @@ exports.editCourse = async (id, courseData) => {
     let updatedCourse = await Course.findByIdAndUpdate(id, courseData);
     return updatedCourse;
 }
+
+exports.deleteCourse = async (id) => {
+    let deletedCourse = await Course.findByIdAndDelete(id);
+    return deletedCourse;
+}

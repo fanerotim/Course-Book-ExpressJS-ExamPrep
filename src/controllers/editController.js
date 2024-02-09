@@ -16,6 +16,13 @@ router.post('/courses/:courseId/edit', async (req, res) => {
 
     let updatedCourse = await courseService.editCourse(courseId, updatedCourseInfo);
     res.redirect(`/courses/${courseId}/`)
+});
+
+router.get('/courses/:courseId/delete', async (req, res) => {
+    let courseId = req.params.courseId;
+    let deletedCourse = await courseService.deleteCourse(courseId);
+  
+    res.redirect('/catalog')
 })
 
 module.exports = router;
