@@ -21,7 +21,8 @@ exports.signUp = async (studentId, courseId) => {
 }
 
 exports.editCourse = async (id, courseData) => {
-    let updatedCourse = await Course.findByIdAndUpdate(id, courseData);
+    let updatedCourse = await Course.findByIdAndUpdate(id, courseData, {runValidators: true});
+    // let updatedCourse = await Course.findOneAndUpdate({_id: id}, courseData, {runValidators: true})
     return updatedCourse;
 }
 

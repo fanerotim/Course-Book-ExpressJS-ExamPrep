@@ -30,8 +30,8 @@ exports.isOwner = async (req, res, next) => {
     let ownerId = courseInfo.owner;
 
     let loggedUserId = req.user._id;
-
-    if (ownerId !== loggedUserId) {
+ 
+    if (JSON.stringify(ownerId) !== JSON.stringify(loggedUserId)) {
         return res.status(402).send('Unauthorized')
     }
     next(); 
