@@ -9,7 +9,7 @@ exports.register = async (userData) => {
     const hasUser = await User.findOne({email: userData.email});
     
     if (hasUser) {
-        throw new Error('Username or password do not match. Please try again.')
+        throw new Error('This email is already taken. Please try again.')
     }
 
     if (userData.password === userData.rePassword) {
@@ -22,10 +22,11 @@ exports.register = async (userData) => {
             password: hashedPassword
         }
 
-        User.create(newUser);
+        return User.create(newUser);
     } else {
         throw new Error('Password mismatch. Please try again.')
     }
+
 }
 
 exports.login = async (userData) => {

@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const authService = require('../services/authService');
 const authMiddleware = require('../middlewares/authMiddleware');
-
+const errorUtil = require('../utils/errorUtil');
 
 router.get('/register', authMiddleware.isLoggedIn, (req, res) => {
     res.render('register');
@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
         let result = await authService.register(userData);
         res.redirect('/');
     } catch(err) {
-        res.render('register', {error: err})
+        res.render('register', {error: errorUtil.getErrorMessage(err)})
     }  
 })
 
